@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@apollo/client": "^4.0.9",
+    "graphql": "^16.12.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3"
+  }
+}
