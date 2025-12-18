@@ -1,5 +1,6 @@
 import { from } from "@apollo/client";
 import React, { ReactNode } from 'react'
+import * as Sentry from '@sentry/nextjs'
 
 interface State {
   hasError: boolean;
@@ -20,9 +21,14 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps , State> {
     return { hasError: true };
   }
 
+  // componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+  //   console.log({ error, errorInfo });
+  // }
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.log({ error, errorInfo });
-  }
+    Sentry.captureException(error, { 
+      extra: errorInfo as unknown as Record<string, any>,
+    });
+}
 
   render() {
     if (this.state.hasError) {
